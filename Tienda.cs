@@ -33,5 +33,37 @@ namespace Tienda
             conector.Close();//cierra la base de datos
 
         }
+        public void listar(DataGridView Grilla)
+        {
+            sql = "SELECT * FROM Productos WHERE nombre='TECLADO'";//trae todas los registros y columnas de la tabla
+            //el asterisco es para que traiga todos, si quiero alguna en particular pongo las variables
+            //el where pone una condicion
+
+            conector.Open();//abre la base de datos
+            comando.Connection = conector; //indica a que base de datos le manda el comando
+            comando.CommandType = CommandType.Text;//indica el tipo de comando
+            comando.CommandText = sql; //indica cual es la tabla
+           
+            OleDbDataReader dr= comando.ExecuteReader();//crea un data reader y lo executa
+            Grilla.Rows.Clear();//limpia la grilla
+            while (dr.Read())//mientras no sean fin de archivo q siga recorriendo
+            {
+                Grilla.Rows.Add(dr["Producto"], dr["Nombre"],dr["Stock"]);
+            }
+        
+            conector.Close();
+        }
+        public void eliminar(int producto)
+        {
+            sql = $"DELETE FROM Productos WHERE producto={producto}";
+            conector.Open();//abre la base de datos
+            comando.Connection = conector; //indica a que base de datos le manda el comando
+            comando.CommandType = CommandType.Text;//indica el tipo de comando
+            comando.CommandText = sql; //indica cual es la tabla
+            comando.ExecuteNonQuery();//ejecuta el comando
+
+            conector.Close();//cierra la base de datos
+
+        }
     }
 }

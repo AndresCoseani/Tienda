@@ -25,14 +25,28 @@ namespace Tienda
 
         private void button2_Click(object sender, EventArgs e)
         {
-            int producto = 101;
-            string nombre = "TECLADO";
-            int stock = 11;
+            Tienda objProductos = new Tienda();
+            objProductos.listar(dataGridView1);
+            //int producto = 101;
+            //string nombre = "TECLADO";
+            //int stock = 11;
 
-            string sql = $"INSTERT INTO Productos VALUE ({producto}, '{nombre}', {stock})";//concatena todo con +",'"+
-            //interpolar: poner el $ antes de las comillas dobles para que el lenguaje tome el valor de las variables
-            //las variables van entre {} y las comillas simples van afuera de las llaves
-            MessageBox.Show(sql);
+            //string sql = $"INSTERT INTO Productos VALUE ({producto}, '{nombre}', {stock})";//concatena todo con +",'"+
+            ////interpolar: poner el $ antes de las comillas dobles para que el lenguaje tome el valor de las variables
+            ////las variables van entre {} y las comillas simples van afuera de las llaves
+            //MessageBox.Show(sql);
+
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Tienda objProductos = new Tienda();
+            objProductos.eliminar(Convert.ToInt32(textBox1.Text));
         }
     }
 }
